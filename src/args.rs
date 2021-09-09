@@ -28,6 +28,10 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
                 println!("goint to the prev");
             }
 
+            "outputs" => {
+                println!("{:?}", mpd_client.outputs().ok().unwrap());
+            }
+
             "stats" => println!("{:?}", mpd_client.stats().ok().unwrap()),
 
             "-h" | "--help" | "help" => help_menu(),
@@ -46,7 +50,9 @@ mprs help:
     next  => play the next song
     prev  => pause the prev song
     stats => show stats of current song
+    outputs => shows outputs
     -h | --help | help  => shows this help menu
 "
     )
 }
+
