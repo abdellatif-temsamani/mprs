@@ -103,6 +103,12 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
                 );
             }
 
+            "toggle" => {
+                // TODO: pause when it playing
+                // TODO: play when it paused or stopped
+
+            }
+
             "stop" => {
                 mpd_client.stop();
                 println!(
