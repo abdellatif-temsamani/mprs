@@ -7,3 +7,4 @@ edition = "2018"
 
 [dependencies]
 mpd = "0.0.12"
+colored = "2.0.0"
