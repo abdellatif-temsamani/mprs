@@ -72,35 +72,74 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
         match &arg.to_lowercase() as &str {
             "pause" => {
                 mpd_client.pause(true);
-                println!("paused");
+                println!("{}", "");
+                println!(
+                    "{} {}",
+                    "paused".bright_yellow(),
+                    mpd_client
+                        .currentsong()
+                        .unwrap()
+                        .unwrap()
+                        .title
+                        .unwrap()
+                        .as_str()
+                        .bright_yellow(),
+                );
             }
 
             "play" => {
                 mpd_client.play();
                 println!(
-                    "playing {:?}",
-                    mpd_client.currentsong().unwrap().unwrap().title.unwrap(),
+                    "{} {}",
+                    "playing".green(),
+                    mpd_client
+                        .currentsong()
+                        .unwrap()
+                        .unwrap()
+                        .title
+                        .unwrap()
+                        .as_str()
+                        .green(),
+                );
+            }
+
+            "stop" => {
+                mpd_client.stop();
+                println!(
+                    "{} {}",
+                    "stopped".bright_red(),
+                    mpd_client
+                        .currentsong()
+                        .unwrap()
+                        .unwrap()
+                        .title
+                        .unwrap()
+                        .as_str()
+                        .bright_red(),
                 );
             }
 
             "next" => {
                 mpd_client.next();
-                println!("goint to the next");
+                println!("{}", "playing the next song".blue());
             }
 
             "prev" => {
                 mpd_client.prev();
-                println!("goint to the prev");
-            }
-
-            "stop" => {
-                mpd_client.stop();
-                println!("mpd stopped");
+                println!("{}", "playing the prev song".blue());
             }
 
             "outputs" => {
                 for output in mpd_client.outputs().ok().unwrap() {
-                    println!("{:?}", output);
+                    print!("{}: ", output.name.bright_purple());
+                    if output.enabled {
+                        print!("{}, ", "enabled".bright_green());
+                    } else {
+                        print!("{}, ", "disabled".bright_red());
+                    }
+
+                    print!("{}. ", output.id.to_string().bright_blue());
+                    println!();
                 }
             }
 
