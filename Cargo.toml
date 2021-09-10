@@ -1,6 +1,6 @@
 [package]
 name = "mprs"
-version = "0.1.4"
+version = "0.1.8"
 edition = "2018"
 authors = ["abdellatif-dev <abdellatif.devlog@gmail.com>"]
 description = "mpd client <rust rewrite of mpc>"
@@ -9,7 +9,7 @@ repository = "https://github.com/abdellatif-dev/mprs"
 license = "GPL"
 keywords = ["mpd", "mpc", "music", "cli", "music player daemon"]
 categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
-exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md"]
+exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md", "install.sh"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

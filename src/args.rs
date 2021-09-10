@@ -1,4 +1,4 @@
-#![allow(unused_must_use)]
+#![allow(unused_must_use, clippy::or_fun_call)]
 extern crate colored;
 use colored::*;
 
