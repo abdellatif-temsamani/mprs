@@ -2,7 +2,7 @@
 extern crate colored;
 use colored::*;
 
-use mpd::Client;
+use mpd::{Client, State};
 use std::{env, net::TcpStream};
 
 pub fn argv_init(mut mpd_client: Client<TcpStream>) {
@@ -72,7 +72,6 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
         match &arg.to_lowercase() as &str {
             "pause" => {
                 mpd_client.pause(true);
-                println!("{}", "");
                 println!(
                     "{} {}",
                     "paused".bright_yellow(),
@@ -104,9 +103,43 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
             }
 
             "toggle" => {
-                // TODO: pause when it playing
-                // TODO: play when it paused or stopped
-
+                // DONE: pause when it playing
+                // DONE: play when it paused or stopped
+                // mpd_client
+                // .unwrap()
+                // .status()
+                match mpd_client.status().unwrap().state {
+                    State::Play => {
+                        mpd_client.pause(true);
+                        println!(
+                            "{} {}",
+                            "paused".bright_yellow(),
+                            mpd_client
+                                .currentsong()
+                                .unwrap()
+                                .unwrap()
+                                .title
+                                .unwrap()
+                                .as_str()
+                                .bright_yellow(),
+                        );
+                    }
+                    _ => {
+                        mpd_client.play();
+                        println!(
+                            "{} {}",
+                            "playing".green(),
+                            mpd_client
+                                .currentsong()
+                                .unwrap()
+                                .unwrap()
+                                .title
+                                .unwrap()
+                                .as_str()
+                                .green(),
+                        );
+                    }
+                }
             }
 
             "stop" => {
@@ -151,7 +184,12 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
 
             "help" => help_menu(),
 
-            _ => continue,
+            "mprs" => continue,
+
+            _ => {
+                println!("{}", "error command not found".bright_red().bold());
+                help_menu();
+            }
         }
     }
 }

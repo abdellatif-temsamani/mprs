@@ -31,12 +31,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "file"
-version = "1.1.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "072420e920a41e95a021116fb47c331d1199aab0f12ca1f77903d5c0ec65c37a"
-
-[[package]]
 name = "hermit-abi"
 version = "0.1.19"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -73,7 +67,6 @@ name = "mprs"
 version = "0.1.4"
 dependencies = [
  "colored",
- "file",
  "mpd",
 ]
 
