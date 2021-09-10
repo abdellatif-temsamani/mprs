@@ -7,7 +7,7 @@ description = "mpd client <rust rewrite of mpc>"
 readme = "README.md"
 repository = "https://github.com/abdellatif-dev/mprs"
 license = "GPL"
-keywords = ["mpd", "mpc", "music", "cli", "music player daemon"]
+keywords = ["mpd", "mpc", "music", "cli", "music_player_daemon"]
 categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
 exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md", "install.sh"]
 
