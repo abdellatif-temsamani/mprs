@@ -12,7 +12,6 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
     }
 
     for command in argv {
-        println!("{}", &command);
         match &command.to_lowercase() as &str {
             "pause" => {
                 client::toggle(&mut mpd_client, String::from("pause"));
