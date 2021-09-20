@@ -1,4 +1,5 @@
-#[allow(unused_mut)]
+#![allow(unused_mut, clippy::or_fun_call)]
+
 use colored::*;
 use mpd::{Client, Output, State};
 use std::net::TcpStream;

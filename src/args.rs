@@ -1,4 +1,3 @@
-#![allow(unused_must_use, clippy::or_fun_call)]
 use colored::*;
 
 use crate::{client, help_menu};
@@ -12,8 +11,9 @@ pub fn argv_init(mut mpd_client: Client<TcpStream>) {
         client::info(&mut mpd_client);
     }
 
-    for arg in argv {
-        match &arg.to_lowercase() as &str {
+    for command in argv {
+        println!("{}", &command);
+        match &command.to_lowercase() as &str {
             "pause" => {
                 client::toggle(&mut mpd_client, String::from("pause"));
                 break;
