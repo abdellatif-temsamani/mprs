@@ -1,6 +1,6 @@
 #[allow(unused_mut)]
 use colored::*;
-use mpd::{Client, State};
+use mpd::{Client, Output, State};
 use std::net::TcpStream;
 
 pub fn new(host: String, port: String) -> Client<TcpStream> {
@@ -149,5 +149,18 @@ pub fn change(mpd_client: &mut Client<TcpStream>, arg: i32) {
             mpd_client.next().expect("error jumping to the next song");
             println!("{}", "playing the next song".blue());
         }
+    }
+}
+
+pub fn outputs(outputs: Vec<Output>) {
+    for output in outputs {
+        print!("{}: ", output.name.bright_purple());
+        if output.enabled {
+            print!("{}, ", "enabled".bright_green());
+        } else {
+            print!("{}, ", "disabled".bright_red());
+        }
+
+        println!("{}. ", output.id.to_string().bright_blue());
     }
 }
