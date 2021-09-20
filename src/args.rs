@@ -6,7 +6,7 @@ use mpd::Client;
 use std::{env, net::TcpStream};
 
 pub fn argv_init(mut mpd_client: Client<TcpStream>) {
-    let mut argv: env::Args = env::args();
+    let argv: env::Args = env::args();
 
     if argv.len() == 1 {
         client::info(&mut mpd_client);
