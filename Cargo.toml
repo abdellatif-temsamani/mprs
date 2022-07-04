@@ -1,6 +1,6 @@
 [package]
 name = "mprs"
-version = "0.1.8"
+version = "0.2.0"
 edition = "2018"
 authors = ["abdellatif-dev <abdellatif.devlog@gmail.com>"]
 description = "mpd client <rust rewrite of mpc>"
@@ -12,6 +12,10 @@ categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
 exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md", "install.sh"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[lib]
+name = "mprs_lib"
+path = "src/lib.rs"
 
 [dependencies]
 mpd = "0.0.12"
