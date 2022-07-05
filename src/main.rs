@@ -1,5 +1,8 @@
+use mprs_lib::args::Argv;
+
 extern crate mprs_lib;
 
 fn main() {
-    println!("write");
+    let args: Argv = Argv::new();
+    println!("{:#?}", args.flags);
 }
