@@ -1,4 +1,4 @@
-use super::{Flag, Type};
+use super::flag::{Flag, Type};
 use std::env::{args, Args};
 
 fn get_flags(args: &mut Args) -> Vec<Flag> {
