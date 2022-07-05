@@ -2,8 +2,9 @@ use std::env::Args;
 
 /// # Type
 /// types for flag
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq)]
 pub enum Type {
+    Name,
     Command,
     Config,
     Error,
@@ -39,6 +40,8 @@ impl Flag {
                 value: value.clone(),
                 flag_type: if value.starts_with("-") {
                     Type::Config
+                } else if order == 0 {
+                    Type::Name
                 } else {
                     Type::Command
                 },
