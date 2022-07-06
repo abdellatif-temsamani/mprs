@@ -1,8 +1,8 @@
-use mprs_lib::args::Argv;
+use mprs_lib::mpd::MpdClient;
 
 extern crate mprs_lib;
 
 fn main() {
-    let args: Argv = Argv::new();
-    println!("{:#?}", args.flags);
+    let mut cllie: MpdClient = MpdClient::new("127.0.0.1".to_owned(), "6600".to_owned());
+    cllie.connect();
 }
