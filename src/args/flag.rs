@@ -28,7 +28,8 @@ pub struct Flag {
 impl Flag {
     /// # new flag
     ///
-    /// Create a new flag with order returns Self: `Flag`
+    /// Create a new flag with order returns Flag
+    ///
     /// ## Params
     /// - **order**: usize
     /// - **args**: &mut Args

@@ -1,6 +1,11 @@
 use mpd::Client;
 use std::{net::TcpStream, process::exit};
 
+/// # MpdClient
+/// contains
+/// - __host__: String,
+/// - __port__: String,
+/// - __client__: Option<Client<TcpStream>>,
 #[derive(Debug)]
 pub struct MpdClient {
     pub host: String,
@@ -9,6 +14,14 @@ pub struct MpdClient {
 }
 
 impl MpdClient {
+    /// # new
+    ///
+    /// new client
+    ///
+    /// ## params
+    /// - __host__ : String
+    /// - __port__ : String
+    ///
     pub fn new(host: String, port: String) -> Self {
         Self {
             host,
@@ -17,6 +30,10 @@ impl MpdClient {
         }
     }
 
+    /// # connect
+    ///
+    /// connect the client to mpd server
+    /// and validate it
     pub fn connect(&mut self) {
         self.client = if let Ok(client) = Client::connect(format!("{}:{}", self.host, self.port)) {
             Some(client)
