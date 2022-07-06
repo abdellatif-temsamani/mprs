@@ -23,6 +23,11 @@ pub struct Argv {
 }
 
 impl Argv {
+    /// # new Argv
+    ///
+    /// Create a new Argv
+    ///
+    ///
     pub fn new() -> Self {
         Self {
             flags: get_flags(&mut args()),

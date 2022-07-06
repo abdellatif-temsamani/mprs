@@ -28,7 +28,7 @@ pub struct Flag {
 impl Flag {
     /// # new flag
     ///
-    /// Create a new flag with order returns Flag
+    /// Create a new flag with order
     ///
     /// ## Params
     /// - **order**: usize
