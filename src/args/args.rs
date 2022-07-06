@@ -47,14 +47,10 @@ impl Argv {
     /// ## Params
     /// - __flag_type__: flag::Type
     ///
-    pub fn get_by_type(&self, flag_type: Type) -> Vec<&Flag> {
-        // DONE: get flags with same type -> Vec<&Flag>
-        let mut flags: Vec<&Flag> = Vec::new();
-        for flag in &self.flags {
-            if flag.flag_type == flag_type {
-                flags.push(flag);
-            }
-        }
-        flags
+    pub fn get_by_type(&mut self, flag_type: Type) -> Vec<Flag> {
+        // DONE: get flags with same type -> Vec<Flag>
+        self.flags
+            .drain_filter(|flag| flag.flag_type == flag_type)
+            .collect()
     }
 }
