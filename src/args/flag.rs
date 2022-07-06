@@ -35,8 +35,8 @@ impl Flag {
     /// - **args**: &mut Args
     ///
     pub fn new(order: usize, args: &mut Args) -> Self {
-        return if let Some(value) = args.nth(0) {
-            Flag {
+        match args.nth(0) {
+            Some(value) => Flag {
                 order,
                 value: value.clone(),
                 flag_type: if value.starts_with("-") {
@@ -46,13 +46,13 @@ impl Flag {
                 } else {
                     Type::Command
                 },
-            }
-        } else {
-            return Flag {
+            },
+
+            None => Flag {
                 order,
-                value: "Error".to_owned(),
+                value: "[Error] -> None".to_owned(),
                 flag_type: Type::Error,
-            };
-        };
+            },
+        }
     }
 }
