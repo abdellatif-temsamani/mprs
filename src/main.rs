@@ -1,8 +1,18 @@
-use mprs_lib::mpd::MpdClient;
+use mprs_lib::{
+    args::{parse::Config, Argv},
+    config::ConfigManager,
+    mpd::MpdClient,
+};
 
 extern crate mprs_lib;
 
 fn main() {
-    let mut cllie: MpdClient = MpdClient::new("127.0.0.1".to_owned(), "6600".to_owned());
-    cllie.connect();
+    let mut args: Argv = Argv::new();
+    let arg_config: Vec<Config> = args.parse_config();
+
+    let mut config_manager: ConfigManager = ConfigManager::new();
+    config_manager.update(arg_config);
+
+    let mut mpd_client: MpdClient = MpdClient::new(config_manager.host, config_manager.port);
+    mpd_client.connect();
 }

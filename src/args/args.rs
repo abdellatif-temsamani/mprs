@@ -1,4 +1,5 @@
 use super::flag::{Flag, Type};
+use super::parse;
 use std::env::{args, Args};
 
 fn get_flags(args: &mut Args) -> Vec<Flag> {
@@ -57,5 +58,9 @@ impl Argv {
         self.flags
             .drain_filter(|flag| flag.flag_type == flag_type)
             .collect()
+    }
+
+    pub fn parse_config(&mut self) -> Vec<parse::Config> {
+        parse::parse_config(self.get_by_type(Type::Config))
     }
 }
