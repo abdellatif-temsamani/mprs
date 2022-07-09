@@ -1,4 +1,4 @@
-use crate::args::parse::Config;
+use super::Param;
 
 #[derive(Debug)]
 pub struct ConfigManager {
@@ -15,7 +15,7 @@ impl ConfigManager {
             silent: false,
         }
     }
-    pub fn update(&mut self, args: Vec<Config>) {
+    pub fn update(&mut self, args: Vec<Param>) {
         for arg in args {
             match &arg.flag as &str {
                 "--host" => self.host = arg.value,

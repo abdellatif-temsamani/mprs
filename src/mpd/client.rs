@@ -1,5 +1,7 @@
-use mpd::Client;
+use mpd::{status::State, Client};
 use std::{net::TcpStream, process::exit};
+
+use crate::config::Param;
 
 /// # MpdClient
 /// contains
@@ -42,6 +44,29 @@ impl MpdClient {
         };
 
         self.vadidate_client();
+    }
+
+    pub fn command(&mut self, param: Param) -> Result<(), mpd::error::Error> {
+        let cli = self.get_client().unwrap();
+        match &param.value as &str {
+            "play" => cli.play(),
+            "pause" => cli.pause(true),
+            "stop" => cli.stop(),
+
+            "toggle" => match cli.status().unwrap().state {
+                State::Stop | State::Pause => cli.play(),
+                State::Play => cli.pause(true),
+            },
+
+            &_ => {
+                println!("[Error] -> unknown command flag");
+                exit(1);
+            }
+        }
+    }
+
+    fn get_client(&mut self) -> Option<&mut Client> {
+        self.client.as_mut()
     }
 
     fn vadidate_client(&self) {

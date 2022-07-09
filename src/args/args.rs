@@ -1,14 +1,19 @@
 use super::flag::{Flag, Type};
 use super::parse;
+use crate::config::Param;
 use std::env::{args, Args};
+use std::process::exit;
 
 fn get_flags(args: &mut Args) -> Vec<Flag> {
-    let mut flags: Vec<Flag> = Vec::new();
+    if args.len() == 1 {
+        println!("no args were given");
+        exit(0)
+    }
 
+    let mut flags: Vec<Flag> = Vec::new();
     for id in 0..args.len() {
         flags.push(Flag::new(id, args));
     }
-
     flags
 }
 
@@ -60,7 +65,11 @@ impl Argv {
             .collect()
     }
 
-    pub fn parse_config(&mut self) -> Vec<parse::Config> {
+    pub fn parse_config(&mut self) -> Vec<Param> {
         parse::parse_config(self.get_by_type(Type::Config))
+    }
+
+    pub fn parse_command(&mut self) -> Param {
+        parse::parse_command(self.get_by_type(Type::Command))
     }
 }
