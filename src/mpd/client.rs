@@ -46,17 +46,61 @@ impl MpdClient {
         self.vadidate_client();
     }
 
-    pub fn command(&mut self, param: Param) -> Result<(), mpd::error::Error> {
+    pub fn command(&mut self, param: Param, silent: bool) {
         let cli = self.get_client().unwrap();
+        // TODO: convert commands to enum
         match &param.value as &str {
-            "play" => cli.play(),
-            "pause" => cli.pause(true),
-            "stop" => cli.stop(),
+            "play" => {
+                cli.play().unwrap();
+                if !silent {
+                    println!("[MPRS] -> playing the song");
+                }
+            }
 
-            "toggle" => match cli.status().unwrap().state {
-                State::Stop | State::Pause => cli.play(),
-                State::Play => cli.pause(true),
-            },
+            "pause" => {
+                cli.pause(true).unwrap();
+                if !silent {
+                    println!("[MPRS] -> Pausing the song");
+                }
+            }
+
+            "stop" => {
+                cli.stop().unwrap();
+                if !silent {
+                    println!("[MPRS] -> Stoping the song");
+                }
+            }
+
+            "toggle" => {
+                match cli.status().unwrap().state {
+                    State::Stop | State::Pause => {
+                        cli.play().unwrap();
+                        if !silent {
+                            println!("[MPRS] -> playing the song");
+                        }
+                    }
+                    State::Play => {
+                        cli.pause(true).unwrap();
+                        if !silent {
+                            println!("[MPRS] -> Pausing the song");
+                        }
+                    }
+                };
+            }
+
+            "next" => {
+                cli.next().unwrap();
+                if !silent {
+                    println!("[MPRS] -> movin to the next");
+                }
+            }
+
+            "prev" => {
+                cli.prev().unwrap();
+                if !silent {
+                    println!("[MPRS] -> movin to the next");
+                }
+            }
 
             &_ => {
                 println!("[Error] -> unknown command flag");
