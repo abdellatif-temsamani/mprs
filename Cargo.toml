@@ -1,6 +1,6 @@
 [package]
 name = "mprs"
-version = "0.2.0"
+version = "0.2.0-beta"
 edition = '2021'
 authors = ["abdellatif-temsamani <abdellatif.devlog@gmail.com>"]
 description = "mpd client <rust rewrite of mpc>"
@@ -26,3 +26,4 @@ opt-level = 3
 
 [dependencies]
 mpd = "0.0.12"
+prettytable-rs = "0.8.0"

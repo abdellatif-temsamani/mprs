@@ -1,6 +1,10 @@
 use std::process::exit;
 
-use crate::{args::flag::Flag, config::Param};
+use crate::{
+    args::flag::Flag,
+    config::Param,
+    help::{get_vertion, help},
+};
 
 pub fn parse_config(config_flags: Vec<Flag>) -> Vec<Param> {
     let mut configs: Vec<Param> = Vec::new();
@@ -15,6 +19,8 @@ pub fn parse_config(config_flags: Vec<Flag>) -> Vec<Param> {
 fn filter_config(flag: Flag) -> Param {
     let flag_values: Vec<String> = flag
         .value
+        .replace("'", "")
+        .replace("\"", "")
         .split("=")
         .map(|x| x.to_owned())
         .collect::<Vec<String>>();
@@ -22,6 +28,17 @@ fn filter_config(flag: Flag) -> Param {
     match &flag_values[0] as &str {
         "--host" | "--port" => Param::config(flag_values[0].clone(), flag_values[1].clone()),
         "--silent" | "-q" => Param::config("--silent".to_owned(), "True".to_owned()),
+
+        "--version" | "-v" => {
+            get_vertion();
+            exit(0);
+        }
+
+        "--help" | "-h" => {
+            help();
+            exit(0);
+        }
+
         &_ => {
             println!("[Error] -> unknown config flag");
             exit(1);

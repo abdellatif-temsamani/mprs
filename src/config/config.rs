@@ -27,6 +27,7 @@ impl ConfigManager {
                         false
                     }
                 }
+
                 &_ => continue,
             }
         }

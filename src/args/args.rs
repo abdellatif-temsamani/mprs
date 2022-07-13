@@ -6,6 +6,7 @@ use std::process::exit;
 
 fn get_flags(args: &mut Args) -> Vec<Flag> {
     if args.len() == 1 {
+        // TODO: print status
         println!("no args were given");
         exit(0)
     }
