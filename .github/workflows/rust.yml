@@ -24,7 +24,7 @@ jobs:
         with:
           command: check
 
-  check:
+  test:
     name: cargo test
     runs-on: ubuntu-latest
     steps:
