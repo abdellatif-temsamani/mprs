@@ -1,20 +1,29 @@
 [package]
 name = "mprs"
-version = "0.1.8"
-edition = "2018"
-authors = ["abdellatif-dev <abdellatif.devlog@gmail.com>"]
+version = "0.2.0-beta"
+edition = '2021'
+authors = ["abdellatif-temsamani <abdellatif.devlog@gmail.com>"]
 description = "mpd client <rust rewrite of mpc>"
 readme = "README.md"
-repository = "https://github.com/abdellatif-dev/mprs"
+repository = "https://github.com/abdellatif-temsamani/mprs"
+homepage = "https://github.com/abdellatif-temsamani/mprs"
 license = "GPL-3.0"
 keywords = ["mpd", "mpc", "music", "cli", "music_player_daemon"]
 categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
-exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md", "install.sh"]
+exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+name = "mprs_lib"
+path = "src/lib.rs"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+
 [dependencies]
 mpd = "0.0.12"
-colored = "2.0.0"
-serde = "1.0.130"
-configr = "0.8.0"
+prettytable-rs = "0.8.0"

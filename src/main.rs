@@ -1,49 +1,15 @@
-use colored::*;
-use configr::Config;
+use mprs_lib::{args::Argv, config::ConfigManager, mpd::MpdClient};
 
-mod args;
-mod client;
-mod config;
+extern crate mprs_lib;
 
 fn main() {
-    let mpd_config = config::MpdConfig::load("mprs", false).unwrap();
-    let mpd_client = client::new(mpd_config.host, mpd_config.port);
-    args::argv_init(mpd_client);
-}
+    let mut args: Argv = Argv::new();
 
-pub fn help_menu() {
-    println!(
-        "
-Usage: mprs <command>
-mprs {}: {}
+    let mut config_manager: ConfigManager = ConfigManager::new();
+    config_manager.update(args.parse_config());
 
-Commands:
-    {} {} show stats of current song
-    {}            {} play the current  song
-    {}            {} pause the current song
-    {}            {} stop the current  song
-    {}            {} play the next song
-    {}            {} pause the prev song
-    {}            {} shows outputs
-    {}            {} shows this help menu
-",
-        "version".green(),
-        "0.1.4".bright_green(),
-        "no args | status".bright_blue(),
-        "=>".yellow(),
-        "play".bright_blue(),
-        "=>".yellow(),
-        "pause".bright_blue(),
-        "=>".yellow(),
-        "stop".bright_blue(),
-        "=>".yellow(),
-        "next".bright_blue(),
-        "=>".yellow(),
-        "prev".bright_blue(),
-        "=>".yellow(),
-        "outputs".bright_blue(),
-        "=>".yellow(),
-        "help".bright_blue(),
-        "=>".yellow(),
-    )
+    let mut mpd_client: MpdClient = MpdClient::new(config_manager.host, config_manager.port);
+    mpd_client.connect();
+
+    let _ = mpd_client.command(args.parse_command(), config_manager.silent);
 }
