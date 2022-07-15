@@ -19,9 +19,9 @@ pub fn parse_config(config_flags: Vec<Flag>) -> Vec<Param> {
 fn filter_config(flag: Flag) -> Param {
     let flag_values: Vec<String> = flag
         .value
-        .replace("'", "")
-        .replace("\"", "")
-        .split("=")
+        .replace('\'', "")
+        .replace('"', "")
+        .split('=')
         .map(|x| x.to_owned())
         .collect::<Vec<String>>();
 

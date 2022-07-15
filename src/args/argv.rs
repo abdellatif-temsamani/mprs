@@ -74,3 +74,9 @@ impl Argv {
         parse::parse_command(self.get_by_type(Type::Command))
     }
 }
+
+impl Default for Argv {
+    fn default() -> Self {
+        Self::new()
+    }
+}

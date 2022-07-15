@@ -2,7 +2,7 @@ use std::env::Args;
 
 /// # Type
 /// types for flag
-#[derive(Debug, Clone, PartialEq)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Type {
     Name,
     Command,
@@ -35,11 +35,11 @@ impl Flag {
     /// - **args**: &mut Args
     ///
     pub fn new(order: usize, args: &mut Args) -> Self {
-        match args.nth(0) {
+        match args.next() {
             Some(value) => Flag {
                 order,
                 value: value.clone(),
-                flag_type: if value.starts_with("-") {
+                flag_type: if value.starts_with('-') {
                     Type::Config
                 } else if order == 0 {
                     Type::Name

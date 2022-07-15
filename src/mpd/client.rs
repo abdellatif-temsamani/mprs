@@ -72,7 +72,6 @@ impl MpdClient {
 
     fn vadidate_client(&self) {
         if self.client.is_some() {
-            return;
         } else {
             println!(
                 "[Error] -> cannot find MPD running on {}:{}",

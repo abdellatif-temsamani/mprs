@@ -11,5 +11,5 @@ fn main() {
     let mut mpd_client: MpdClient = MpdClient::new(config_manager.host, config_manager.port);
     mpd_client.connect();
 
-    let _ = mpd_client.command(args.parse_command(), config_manager.silent);
+    mpd_client.command(args.parse_command(), config_manager.silent)
 }
