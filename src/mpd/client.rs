@@ -54,12 +54,10 @@ impl MpdClient {
             "play" => commands::play_pause_stop(cli, silent, State::Play),
             "pause" => commands::play_pause_stop(cli, silent, State::Pause),
             "stop" => commands::play_pause_stop(cli, silent, State::Stop),
-
-            "toggle" => commands::toggle(cli, silent),
-
+            "toggle" => commands::toggle_client(cli, silent),
             "next" => commands::prev_next(cli, silent, Queue::Next),
-
             "prev" => commands::prev_next(cli, silent, Queue::Prev),
+            "kill" => commands::kill_mpd(silent),
 
             &_ => {
                 println!("[Error] -> unknown command flag");

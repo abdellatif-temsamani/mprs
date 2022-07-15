@@ -3,7 +3,7 @@
 _mpd client written in rust_
 
 Usage: **mprs** <command>
-mprs version: 0.2.0
+mprs version: 0.2.0-beta
 
 ## commands
 
@@ -16,7 +16,23 @@ mprs version: 0.2.0
 |      next       |     play the next song     |
 |      prev       |  pause the previous song   |
 |      help       |    shows this help menu    |
-|  --host="HOST"  |     host of mpd server     |
-|  --port="PORT"  |     port of mpd server     |
+|      kill       | kill mpd server(Unix only) |
+|  --host='HOST'  |     host of mpd server     |
+|  --port='PORT'  |     port of mpd server     |
 | --silent or -q  |       silent output        |
-| --version or -h |     print the version      |
+| --version or -v |     print the version      |
+|  --help or -h   |       print the help       |
+
+# build
+
+- compile
+
+```bash
+rustup run nightly cargo run
+```
+
+- install
+
+```bash
+rustup run nightly cargo install
+```
