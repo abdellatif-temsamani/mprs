@@ -3,7 +3,7 @@
 _mpd client written in rust_
 
 Usage: **mprs** <command>
-mprs version: 0.2.0
+mprs version: 0.2.0-beta
 
 ## commands
 
@@ -22,3 +22,17 @@ mprs version: 0.2.0
 | --silent or -q  |       silent output        |
 | --version or -v |     print the version      |
 |  --help or -h   |       print the help       |
+
+# build
+
+- compile
+
+```bash
+rustup run nightly cargo run
+```
+
+- install
+
+```bash
+rustup run nightly cargo install
+```
