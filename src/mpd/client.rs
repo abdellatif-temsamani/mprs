@@ -3,7 +3,7 @@ use std::{net::TcpStream, process::exit};
 
 use crate::config::Param;
 
-use super::commands::{self, Queue};
+use super::{commands::{self, Queue}, status::status};
 
 /// # MpdClient
 /// contains
@@ -57,7 +57,8 @@ impl MpdClient {
             "toggle" => commands::toggle_client(cli, silent),
             "next" => commands::prev_next(cli, silent, Queue::Next),
             "prev" => commands::prev_next(cli, silent, Queue::Prev),
-            "kill" => commands::kill_mpd(silent),
+            "kill" => commands::kill_mpd(cli, silent),
+            "status" => status(cli, silent),
 
             &_ => {
                 println!("[Error] -> unknown command flag");
