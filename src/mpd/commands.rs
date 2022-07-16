@@ -15,7 +15,7 @@ pub fn toggle_client(cli: &mut Client, silent: bool) {
 
 pub fn play_pause_stop(cli: &mut Client, silent: bool, state: State) {
     if !silent {
-        println!("[MPRS] -> {:?}", state);
+        println!("[MPRS] -> {:?} the song", state);
     }
     match state {
         State::Stop => cli.stop().unwrap(),

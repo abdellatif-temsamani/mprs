@@ -58,10 +58,10 @@ impl MpdClient {
             "next" => commands::prev_next(cli, silent, Queue::Next),
             "prev" => commands::prev_next(cli, silent, Queue::Prev),
             "kill" => commands::kill_mpd(cli, silent),
-            "status" => status(cli, silent),
+            "status" | "mprs_status" => status(cli, silent),
 
             &_ => {
-                println!("[Error] -> unknown command flag");
+                println!("[Error] -> {} unknown command flag", param.value);
                 exit(1);
             }
         }
