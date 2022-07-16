@@ -2,19 +2,20 @@ use super::flag::{Flag, Type};
 use super::parse;
 use crate::config::Param;
 use std::env::{args, Args};
-use std::process::exit;
 
 fn get_flags(args: &mut Args) -> Vec<Flag> {
-    if args.len() == 1 {
-        // TODO: print status
-        println!("no args were given");
-        exit(0)
+    let mut flags: Vec<Flag> = Vec::new();
+    // DONE: ignore the name of command
+    if args.len() >= 1 {
+        flags.push(Flag::new("mprs_status".to_owned()));
     }
 
-    let mut flags: Vec<Flag> = Vec::new();
-    for id in 0..args.len() {
-        flags.push(Flag::new(id, args));
+    args.next();
+
+    for arg in args {
+        flags.push(Flag::new(arg));
     }
+
     flags
 }
 

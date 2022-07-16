@@ -1,10 +1,7 @@
-use std::env::Args;
-
 /// # Type
 /// types for flag
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Type {
-    Name,
     Command,
     Config,
     Error,
@@ -20,7 +17,6 @@ pub enum Type {
 ///
 #[derive(Debug, Clone)]
 pub struct Flag {
-    pub order: usize,
     pub value: String,
     pub flag_type: Type,
 }
@@ -34,24 +30,13 @@ impl Flag {
     /// - **order**: usize
     /// - **args**: &mut Args
     ///
-    pub fn new(order: usize, args: &mut Args) -> Self {
-        match args.next() {
-            Some(value) => Flag {
-                order,
-                value: value.clone(),
-                flag_type: if value.starts_with('-') {
-                    Type::Config
-                } else if order == 0 {
-                    Type::Name
-                } else {
-                    Type::Command
-                },
-            },
-
-            None => Flag {
-                order,
-                value: "[Error] -> None".to_owned(),
-                flag_type: Type::Error,
+    pub fn new(arg: String) -> Self {
+        Self {
+            value: arg.clone(),
+            flag_type: if arg.starts_with('-') {
+                Type::Config
+            } else {
+                Type::Command
             },
         }
     }

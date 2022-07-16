@@ -26,8 +26,8 @@ fn filter_config(flag: Flag) -> Param {
         .collect::<Vec<String>>();
 
     match &flag_values[0] as &str {
+        "-q" | "--silent" => Param::config("--silent".to_owned(), "True".to_owned()),
         "--host" | "--port" => Param::config(flag_values[0].clone(), flag_values[1].clone()),
-        "--silent" | "-q" => Param::config("--silent".to_owned(), "True".to_owned()),
 
         "--version" | "-v" => {
             get_vertion();
@@ -40,7 +40,7 @@ fn filter_config(flag: Flag) -> Param {
         }
 
         &_ => {
-            println!("[Error] -> unknown config flag");
+            println!("[Error] -> {} unknown config flag", flag_values[0]);
             exit(1);
         }
     }
