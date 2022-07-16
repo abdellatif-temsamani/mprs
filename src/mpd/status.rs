@@ -5,7 +5,7 @@ fn current_song(cli: &mut Client) {
     let song = cli.currentsong().unwrap().unwrap();
     println!(
         "[Song]\ntitle: {}, duration: {}:{}",
-        song.title.unwrap(),
+        song.title.unwrap_or("not found".to_owned()),
         (song.duration.unwrap().num_seconds() / 60) % 60,
         song.duration.unwrap().num_seconds() % 60,
     );
