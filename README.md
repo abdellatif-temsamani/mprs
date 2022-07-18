@@ -28,7 +28,7 @@ mprs version: 0.2.0-beta
 - compile
 
 ```bash
-rustup run nightly cargo run
+rustup run nightly cargo build
 ```
 
 - install
