@@ -3,7 +3,10 @@ use std::{net::TcpStream, process::exit};
 
 use crate::config::Param;
 
-use super::{commands::{self, Queue}, status::status};
+use super::{
+    commands::{self, Queue},
+    status::status,
+};
 
 /// # MpdClient
 /// contains
