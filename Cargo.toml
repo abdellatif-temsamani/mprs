@@ -11,6 +11,7 @@ license = "GPL-3.0"
 keywords = ["mpd", "mpc", "music", "cli", "music_player_daemon"]
 categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
 exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md"]
+resolver = "2"
 
 [lib]
 name = "mprs_lib"
@@ -18,9 +19,26 @@ path = "src/lib.rs"
 
 [profile.dev]
 opt-level = 0
+debug = true
+debug-assertions = true
+overflow-checks = true
+lto = false
+panic = 'unwind'
+incremental = true
+codegen-units = 256
+rpath = false
 
 [profile.release]
 opt-level = 3
+debug = false
+strip = "debuginfo"
+debug-assertions = false
+overflow-checks = false
+lto = false
+panic = 'unwind'
+incremental = false
+codegen-units = 16
+rpath = false
 
 [dependencies]
 mpd = "0.0.12"

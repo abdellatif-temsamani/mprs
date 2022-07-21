@@ -1,9 +1,8 @@
-# mprs
+# Mprs
 
-_mpd client written in rust_
+_MPD client written in rust_
 
-Usage: **mprs** <command>
-mprs version: 0.2.0-beta
+Usage: **mprs**.
 
 ## commands
 
@@ -16,7 +15,7 @@ mprs version: 0.2.0-beta
 |      next       |     play the next song     |
 |      prev       |  pause the previous song   |
 |      help       |    shows this help menu    |
-|      kill       | kill mpd server(Unix only) |
+|      kill       |      kill mpd server       |
 |  --host='HOST'  |     host of mpd server     |
 |  --port='PORT'  |     port of mpd server     |
 | --silent or -q  |       silent output        |
