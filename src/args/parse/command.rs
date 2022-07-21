@@ -7,7 +7,7 @@ pub fn parse_command(commands_flags: Vec<Flag>) -> Param {
         return Param::command(commands_flags[0].value.clone());
     }
     {
-        if commands_flags[0].value == "mprs_status".to_owned() {
+        if commands_flags[0].value == *"mprs_status" {
             return Param::command(commands_flags[1].value.clone());
         } else {
             println!("[Error] -> cannot run more than 1 command");
