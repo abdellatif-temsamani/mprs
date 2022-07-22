@@ -12,8 +12,8 @@ pub fn parse_command(commands_flags: Vec<Flag>) -> Param {
         );
         exit(1);
     } else if commands_flags.len() == 1 {
-        return Param::command(commands_flags[0].value.clone());
+        Param::command(commands_flags[0].value.clone())
     } else {
-        return Param::command(commands_flags[1].value.clone());
+        Param::command(commands_flags[1].value.clone())
     }
 }

@@ -31,17 +31,17 @@ pub fn format_state(state: State) -> ColoredString {
 pub fn format_status(status: Status) {
     // DONE: format status
     println!(
-        "state: {}, volume: {}, repeat: {}\n{}",
+        "state: {}, volume: {}, repeat: {}\n\nrandom: {}, single: {}, consume: {}\ncrossfade: {}, queue_len: {}",
         format_state(status.state),
         status.volume.to_string().green(),
         format_boolstr(status.repeat),
-        format!(
-            "random: {}, single: {}, consume: {}\ncrossfade: {:?}, queue_len: {}",
-            format_boolstr(status.random),
-            format_boolstr(status.single),
-            format_boolstr(status.consume),
-            status.crossfade,
-            status.queue_len
-        )
+        format_boolstr(status.random),
+        format_boolstr(status.single),
+        format_boolstr(status.consume),
+        match status.crossfade {
+            Some(cross) => cross.num_seconds().to_string().blue(),
+            None => "None".on_red().black(),
+        },
+        status.queue_len
     );
 }
