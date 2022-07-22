@@ -14,8 +14,17 @@ fn current_song(song: Song) {
 }
 
 fn get_status(status: Status) {
-    // TODO: format status  <18-07-22, abdellatif>
-    println!("{:?}", status);
+    // DONE: format status
+    println!(
+        "state: {:?}, volume: {}, repeat: {}\n{}",
+        status.state,
+        status.volume,
+        status.repeat,
+        format!(
+            "random: {:?}, single: {:?}, consume: {:?}\ncrossfade: {:?}, queue_len: {:?}",
+            status.random, status.single, status.consume, status.crossfade, status.queue_len
+        )
+    );
 }
 
 pub fn status(cli: &mut Client, silent: bool) {
