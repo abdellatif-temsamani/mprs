@@ -1,5 +1,7 @@
 use std::process::exit;
 
+use colored::Colorize;
+
 use crate::{
     args::flag::Flag,
     config::Param,
@@ -40,7 +42,7 @@ fn filter_config(flag: Flag) -> Param {
         }
 
         &_ => {
-            println!("[Error] -> {} unknown config flag", flag_values[0]);
+            println!("[Error] -> {} unknown config flag", flag_values[0].on_red().black());
             exit(1);
         }
     }

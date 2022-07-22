@@ -6,5 +6,6 @@ extern crate prettytable;
 
 pub mod args;
 pub mod config;
+pub mod format;
 pub mod help;
 pub mod mpd;

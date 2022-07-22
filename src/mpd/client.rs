@@ -1,3 +1,4 @@
+use colored::Colorize;
 use mpd::{Client, State};
 use std::{net::TcpStream, process::exit};
 
@@ -64,7 +65,10 @@ impl MpdClient {
             "status" | "mprs_status" => status(cli, silent),
 
             &_ => {
-                println!("[Error] -> {} unknown command flag", param.value);
+                println!(
+                    "[Error] -> {} unknown command flag",
+                    param.value.on_red().black()
+                );
                 exit(1);
             }
         }
@@ -79,7 +83,8 @@ impl MpdClient {
         } else {
             println!(
                 "[Error] -> cannot find MPD running on {}:{}",
-                self.host, self.port
+                self.host.on_red().black(),
+                self.port.on_red().black()
             );
             exit(1);
         }
