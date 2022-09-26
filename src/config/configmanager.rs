@@ -20,16 +20,16 @@ impl ConfigManager {
             match &arg.flag as &str {
                 "--host" => self.host = arg.value,
                 "--port" => self.port = arg.value,
-                "--silent" => {
-                    self.silent = if arg.value == "True".to_owned() {
-                        true
-                    } else {
-                        false
-                    }
-                }
+                "--silent" => self.silent = arg.value == *"True",
 
                 &_ => continue,
             }
         }
+    }
+}
+
+impl Default for ConfigManager {
+    fn default() -> Self {
+        Self::new()
     }
 }

@@ -1,9 +1,13 @@
+use colored::Colorize;
 use mpd::{Client, State};
 use std::{net::TcpStream, process::exit};
 
 use crate::config::Param;
 
-use super::commands::{self, Queue};
+use super::{
+    commands::{self, Queue},
+    status::status,
+};
 
 /// # MpdClient
 /// contains
@@ -57,10 +61,14 @@ impl MpdClient {
             "toggle" => commands::toggle_client(cli, silent),
             "next" => commands::prev_next(cli, silent, Queue::Next),
             "prev" => commands::prev_next(cli, silent, Queue::Prev),
-            "kill" => commands::kill_mpd(silent),
+            "kill" => commands::kill_mpd(cli, silent),
+            "status" | "mprs_status" => status(cli, silent),
 
             &_ => {
-                println!("[Error] -> unknown command flag");
+                println!(
+                    "[Error] -> {} unknown command flag",
+                    param.value.on_red().black()
+                );
                 exit(1);
             }
         }
@@ -72,11 +80,11 @@ impl MpdClient {
 
     fn vadidate_client(&self) {
         if self.client.is_some() {
-            return;
         } else {
             println!(
                 "[Error] -> cannot find MPD running on {}:{}",
-                self.host, self.port
+                self.host.on_red().black(),
+                self.port.on_red().black()
             );
             exit(1);
         }

@@ -1,3 +1,4 @@
+use colored::Colorize;
 use prettytable::format;
 
 pub fn help() {
@@ -5,19 +6,19 @@ pub fn help() {
     let mut table = table!(
         ["    argument     ", "       description        "],
         ["-----------------", "--------------------------"],
-        ["     no args     ", "show stats of current song"],
-        ["      play       ", "  play the current song   "],
-        ["      pause      ", "  pause the current song  "],
-        ["      stop       ", "  stop the current song   "],
-        ["      next       ", "    play the next song    "],
-        ["      prev       ", " pause the previous song  "],
-        ["      help       ", "   shows this help menu   "],
-        ["      kill       ", "kill mpd server(Unix only)"],
-        ["  --host='HOST'  ", "    host of mpd server    "],
-        ["  --port='PORT'  ", "    port of mpd server    "],
-        [" --silent or -q  ", "      silent output       "],
-        [" --version or -v ", "    print the version     "],
-        ["  --help or -h   ", "      print the help      "]
+        ["     no args     ", "show stats of current song".blue()],
+        ["      play       ", "  play the current song   ".blue()],
+        ["      pause      ", "  pause the current song  ".blue()],
+        ["      stop       ", "  stop the current song   ".blue()],
+        ["      next       ", "    play the next song    ".blue()],
+        ["      prev       ", " pause the previous song  ".blue()],
+        ["      help       ", "   shows this help menu   ".blue()],
+        ["      kill       ", "      kill mpd server     ".blue()],
+        ["  --host='HOST'  ", "    host of mpd server    ".blue()],
+        ["  --port='PORT'  ", "    port of mpd server    ".blue()],
+        [" --silent or -q  ", "      silent output       ".blue()],
+        [" --version or -v ", "    print the version     ".blue()],
+        ["  --help or -h   ", "      print the help      ".blue()]
     );
 
     table.set_format(get_format());
@@ -25,7 +26,7 @@ pub fn help() {
 }
 
 pub fn get_vertion() {
-    println!("MPRS version = {}", env!("CARGO_PKG_VERSION"));
+    println!("MPRS version = {}", env!("CARGO_PKG_VERSION").bright_blue());
 }
 
 fn get_format() -> format::TableFormat {
