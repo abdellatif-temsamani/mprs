@@ -1,6 +1,4 @@
-use mprs_lib::{args::Argv, config::ConfigManager, mpd::MpdClient};
-
-extern crate mprs_lib;
+use mprs::{args::Argv, config::ConfigManager, mpd::MpdClient};
 
 fn main() {
     let mut args: Argv = Argv::new();

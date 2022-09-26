@@ -12,10 +12,6 @@ keywords = ["mpd", "mpc", "music", "cli", "music_player_daemon"]
 categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
 exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md"]
 
-[lib]
-name = "mprs_lib"
-path = "src/lib.rs"
-
 [profile.dev]
 opt-level = 0
 debug = true
@@ -42,4 +38,4 @@ rpath = false
 [dependencies]
 colored = "2.0.0"
 mpd = "0.0.12"
-prettytable-rs = "0.8.0"
+prettytable-rs = "0.9.0"

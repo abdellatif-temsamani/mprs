@@ -21,7 +21,7 @@ pub fn parse_config(config_flags: Vec<Flag>) -> Vec<Param> {
 fn filter_config(flag: Flag) -> Param {
     let flag_values: Vec<String> = flag
         .value
-        .replace('\'', "")
+        .replace('"', "")
         .replace('"', "")
         .split('=')
         .map(|x| x.to_owned())
@@ -42,7 +42,10 @@ fn filter_config(flag: Flag) -> Param {
         }
 
         &_ => {
-            println!("[Error] -> {} unknown config flag", flag_values[0].on_red().black());
+            println!(
+                "[Error] -> {} unknown config flag",
+                flag_values[0].on_red().black()
+            );
             exit(1);
         }
     }
