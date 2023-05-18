@@ -1,3 +1,13 @@
+
+
+<!-- toc -->
+
+- [Mprs](#mprs)
+  * [commands](#commands)
+- [build](#build)
+
+<!-- tocstop -->
+
 # Mprs
 
 _MPD client written in rust_

@@ -16,9 +16,9 @@ use super::{
 /// - __client__: Option<Client<TcpStream>>,
 #[derive(Debug)]
 pub struct MpdClient {
-    pub host: String,
-    pub port: String,
-    pub client: Option<Client<TcpStream>>,
+    host: String,
+    port: String,
+    client: Option<Client<TcpStream>>,
 }
 
 impl MpdClient {

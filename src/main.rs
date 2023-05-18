@@ -6,8 +6,9 @@ fn main() {
     let mut config_manager: ConfigManager = ConfigManager::new();
     config_manager.update(args.parse_config());
 
-    let mut mpd_client: MpdClient = MpdClient::new(config_manager.host, config_manager.port);
+    let connection: [String; 2] = config_manager.get_connection();
+    let mut mpd_client: MpdClient = MpdClient::new(connection[0].clone(), connection[1].clone());
     mpd_client.connect();
 
-    mpd_client.command(args.parse_command(), config_manager.silent)
+    mpd_client.command(args.parse_command(), config_manager.silent())
 }

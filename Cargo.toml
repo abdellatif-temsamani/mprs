@@ -38,4 +38,4 @@ rpath = false
 [dependencies]
 colored = "2.0.0"
 mpd = "0.0.12"
-prettytable-rs = "0.9.0"
+prettytable-rs = "0.10.0"

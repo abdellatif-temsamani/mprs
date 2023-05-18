@@ -2,9 +2,9 @@ use super::Param;
 
 #[derive(Debug)]
 pub struct ConfigManager {
-    pub host: String,
-    pub port: String,
-    pub silent: bool,
+    host: String,
+    port: String,
+    silent: bool,
 }
 
 impl ConfigManager {
@@ -25,6 +25,14 @@ impl ConfigManager {
                 &_ => continue,
             }
         }
+    }
+
+    pub fn get_connection(&self) -> [String; 2] {
+        [self.host.clone(), self.port.clone()]
+    }
+
+    pub fn silent(&self) -> bool {
+        self.silent
     }
 }
 
