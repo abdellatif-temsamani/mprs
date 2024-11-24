@@ -7,6 +7,11 @@ use clap::{Parser, Subcommand};
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
+
+    #[arg(long, required = false, default_value = "127.0.0.1")]
+    pub host: String,
+    #[arg(long, required = false, default_value = "6600")]
+    pub port: String,
 }
 
 #[derive(Debug, Subcommand)]

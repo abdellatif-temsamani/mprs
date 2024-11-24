@@ -1,22 +1,26 @@
+extern crate mpd;
+
+mod args;
+mod mpd_client;
+
 use std::process::exit;
 
 use args::{Cli, Commands};
 use clap::Parser;
-
-mod args;
+use mpd_client::connect_client;
 
 fn main() {
-    let app = Cli::parse();
-    // TODO: add mpd client
+    let argv = Cli::parse();
+    let mut mpd_client = connect_client(argv.host, argv.port);
 
-    match app.command {
+    match argv.command {
         Commands::Play => {
-            // TODO: play the current song with client
+            let _ = mpd_client.play();
             println!("playing the song...");
             exit(0)
         }
         Commands::Pause => {
-            // TODO: pause the current song with client
+            let _ = mpd_client.pause(true);
             println!("paused the song...");
             exit(0)
         }
