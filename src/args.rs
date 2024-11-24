@@ -20,4 +20,6 @@ pub enum Commands {
     Play,
     #[command()]
     Pause,
+    #[command()]
+    Kill,
 }
