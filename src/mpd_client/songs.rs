@@ -27,13 +27,17 @@ pub fn list_queue(mut client: Client) {
     let queue = client.queue();
     match queue {
         Ok(songs) => {
-            for song in songs {
-                println!(
-                    "{} {} {}",
-                    song.artist.unwrap_or("no artist found".to_string()).green(),
-                    format_duration(song.duration.unwrap().as_secs()),
-                    song.title.unwrap_or("no title found".to_string()).blue(),
-                );
+            if songs.is_empty() {
+                println!("{}", "Queue is empty".yellow());
+            } else {
+                for song in songs {
+                    println!(
+                        "{} {} {}",
+                        song.artist.unwrap_or("no artist found".to_string()).green(),
+                        format_duration(song.duration.unwrap().as_secs()),
+                        song.title.unwrap_or("no title found".to_string()).blue(),
+                    );
+                }
             }
         }
 
@@ -64,8 +68,7 @@ pub fn add_to_queue(client: &mut Client, base_dir: &str) {
                     range: None,
                     tags: Vec::new(),
                 };
-                let id = client.push(song).unwrap();
-                println!("id: {:?}", id);
+                let _ = client.push(song).unwrap();
             }
         }),
         Err(_err) => {
@@ -73,4 +76,24 @@ pub fn add_to_queue(client: &mut Client, base_dir: &str) {
             exit(2);
         }
     }
+}
+
+pub fn status(mut client: Client) {
+    match client.currentsong().unwrap() {
+        Some(song) => {
+            println!();
+            println!("{}", song.file);
+            println!(
+                "playing '{}' by {}",
+                song.title.unwrap_or("title not found".to_owned()).green(),
+                song.artist.unwrap_or("artist not found".to_owned()).green(),
+            );
+            println!(
+                "duration '{}' {}",
+                format_duration(song.duration.unwrap().as_secs()).green(),
+                song.file.green(),
+            );
+        }
+        None => println!("{}", "no current song to play".red().bold()),
+    };
 }

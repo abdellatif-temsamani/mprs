@@ -10,5 +10,5 @@ pub fn format_duration(secs: u64) -> String {
     }
 
     let secs = secs % 60;
-    return format!("{}:{}", mins, secs);
+    format!("{}:{}", mins, secs)
 }

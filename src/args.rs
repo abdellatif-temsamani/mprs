@@ -1,10 +1,9 @@
 use clap::{ColorChoice, Parser, Subcommand};
-use colored::Colorize;
 
 /// A fictional versioning CLI
 #[derive(Debug, Parser)] // requires `derive` feature
 #[command(name = "git")]
-#[command(about = "A fictional versioning CLI", long_about = None)]
+#[command(about = "mpd client writen in rust")]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
@@ -17,15 +16,34 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
+    /// # controls
+    #[command(about = "display info")]
+    Status,
+    #[command(about = "Play the queued song")]
+    Play,
+    #[command(about = "Pause the queued song")]
+    Pause,
+    #[command(about = "Play the next queued song")]
+    Next,
+    #[command(about = "Play the prev queued song")]
+    Prev,
+    #[command(about = "Stop the queued song")]
+    Stop,
+    #[command(about = "kill MPD process")]
+    Kill,
+
+    /// # Files
     #[command(
         color= ColorChoice::Always,
         alias = "ls",
-        about = format!("{} list file in mpd music_directory", "`ls` for short.".green())
+        about = "`ls` for short. list file in mpd music_directory"
     )]
     List {
         #[arg(required = false, default_value = ".")]
         path: String,
     },
+
+    /// # Queue
     #[command(about = "Add a song to the queue")]
     Add {
         #[arg(required = false, default_value = ".")]
