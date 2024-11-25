@@ -1,9 +1,9 @@
 [package]
 name = "mprs"
-version = "0.2.0"
+version = "0.3.0"
 edition = '2021'
-authors = ["abdellatif-temsamani <abdellatif.devlog@gmail.com>"]
-description = "mpd client <rust rewrite of mpc>"
+authors = ["abdellatif-temsamani <contact@abdellatif.dev>"]
+description = "mpd written client rust"
 readme = "README.md"
 repository = "https://github.com/abdellatif-temsamani/mprs"
 homepage = "https://github.com/abdellatif-temsamani/mprs"
@@ -12,30 +12,7 @@ keywords = ["mpd", "mpc", "music", "cli", "music_player_daemon"]
 categories = ["command-line-utilities", "multimedia", "multimedia::audio"]
 exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md"]
 
-[profile.dev]
-opt-level = 0
-debug = true
-debug-assertions = true
-overflow-checks = true
-lto = false
-panic = 'unwind'
-incremental = true
-codegen-units = 256
-rpath = false
-
-[profile.release]
-opt-level = 3
-debug = false
-strip = "debuginfo"
-debug-assertions = false
-overflow-checks = false
-lto = false
-panic = 'unwind'
-incremental = false
-codegen-units = 16
-rpath = false
-
 [dependencies]
-colored = "2.0.0"
-mpd = "0.0.12"
-prettytable-rs = "0.9.0"
+clap = { version = "4.5.21", features = ["cargo", "derive"] }
+colored = "2.1.0"
+mpd = "0.1.0"

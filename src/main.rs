@@ -1,13 +1,40 @@
-use mprs::{args::Argv, config::ConfigManager, mpd::MpdClient};
+extern crate mpd;
+
+use colored::Colorize;
+mod args;
+mod mpd_client;
+mod utils;
+
+use args::{Cli, Commands};
+use clap::Parser;
+use mpd_client::client::connect_client;
+use mpd_client::controls::{next, pause, play, prev, stop};
+use mpd_client::songs::{add_to_queue, list, list_queue, status};
 
 fn main() {
-    let mut args: Argv = Argv::new();
+    let argv = Cli::parse();
+    let mut client = connect_client(argv.host, argv.port);
 
-    let mut config_manager: ConfigManager = ConfigManager::new();
-    config_manager.update(args.parse_config());
-
-    let mut mpd_client: MpdClient = MpdClient::new(config_manager.host, config_manager.port);
-    mpd_client.connect();
-
-    mpd_client.command(args.parse_command(), config_manager.silent)
+    match argv.command {
+        Commands::Status => status(client),
+        Commands::Play => play(client),
+        Commands::Pause => pause(client),
+        Commands::Stop => stop(client),
+        Commands::Next => next(client),
+        Commands::Prev => prev(client),
+        Commands::Kill => {
+            client.kill().unwrap();
+            println!("{}", "kill MPD process".red().bold());
+        }
+        Commands::List { path } => list(client, &path),
+        Commands::Add { path } => {
+            add_to_queue(&mut client, &path);
+            println!("{}", "added to the queue".green());
+        }
+        Commands::Queued => list_queue(client),
+        Commands::Clear => {
+            client.clear().unwrap();
+            println!("{}", "cleared queue".green());
+        }
+    }
 }
