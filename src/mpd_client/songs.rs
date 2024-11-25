@@ -2,18 +2,18 @@ use std::process::exit;
 
 use crate::utils::format_duration;
 use colored::Colorize;
-use mpd::Client;
+use mpd::{Client, Song};
 
 pub fn list(mut client: Client, path: &str) {
     let dirs = client.listfiles(path);
 
     match dirs {
-        Ok(dir) => dir.into_iter().for_each(|a| {
-            if a.0 == "directory" {
-                println!("{}", a.1.blue());
+        Ok(dir) => dir.into_iter().for_each(|item| {
+            if item.0 == "directory" {
+                println!("{}", item.1.blue());
             }
-            if a.0 == "file" {
-                println!("{}", a.1.white());
+            if item.0 == "file" {
+                println!("{}", item.1.white());
             }
         }),
         Err(_err) => {
@@ -40,6 +40,37 @@ pub fn list_queue(mut client: Client) {
         Err(_err) => {
             println!("error reading the queue");
             exit(1);
+        }
+    }
+}
+
+pub fn add_to_queue(client: &mut Client, base_dir: &str) {
+    let dirs = client.listfiles(base_dir);
+
+    match dirs {
+        Ok(dir) => dir.into_iter().for_each(|item| {
+            if item.0 == "directory" {
+                add_to_queue(client, &item.1);
+            }
+            if item.0 == "file" {
+                let song = Song {
+                    file: format!("{}/{}", base_dir, item.1),
+                    name: None,
+                    title: None,
+                    last_mod: None,
+                    artist: None,
+                    duration: None,
+                    place: None,
+                    range: None,
+                    tags: Vec::new(),
+                };
+                let id = client.push(song).unwrap();
+                println!("id: {:?}", id);
+            }
+        }),
+        Err(_err) => {
+            println!("No such file or directory");
+            exit(2);
         }
     }
 }

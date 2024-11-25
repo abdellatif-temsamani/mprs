@@ -1,4 +1,5 @@
-use clap::{Parser, Subcommand};
+use clap::{ColorChoice, Parser, Subcommand};
+use colored::Colorize;
 
 /// A fictional versioning CLI
 #[derive(Debug, Parser)] // requires `derive` feature
@@ -16,15 +17,22 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
-    #[command(alias = "ls", about = "or `ls` for short")]
+    #[command(
+        color= ColorChoice::Always,
+        alias = "ls",
+        about = format!("{} list file in mpd music_directory", "`ls` for short.".green())
+    )]
     List {
-        #[arg(
-            required = false,
-            default_value = ".",
-            help = "path to the files (base dir = music_directory in mpd.conf)"
-        )]
+        #[arg(required = false, default_value = ".")]
         path: String,
     },
-    #[command(about = "list the queue")]
+    #[command(about = "Add a song to the queue")]
+    Add {
+        #[arg(required = false, default_value = ".")]
+        path: String,
+    },
+    #[command(about = "Clear the queue")]
     Queued,
+    #[command(about = "List the queue")]
+    Clear,
 }
