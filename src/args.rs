@@ -16,10 +16,15 @@ pub struct Cli {
 
 #[derive(Debug, Subcommand)]
 pub enum Commands {
-    #[command()]
-    Play,
-    #[command()]
-    Pause,
-    #[command()]
-    Kill,
+    #[command(alias = "ls", about = "or `ls` for short")]
+    List {
+        #[arg(
+            required = false,
+            default_value = ".",
+            help = "path to the files (base dir = music_directory in mpd.conf)"
+        )]
+        path: String,
+    },
+    #[command(about = "list the queue")]
+    Queued,
 }
