@@ -26,10 +26,10 @@ To build and install `mprs`, follow these steps:
 
 ```bash
 # Build the project
-rustup run nightly cargo build --release
+rustup run cargo build --release
 
 # Install the binary
-rustup run nightly cargo install --path .
+rustup run cargo install --path .
 ```
 
 ## Usage
