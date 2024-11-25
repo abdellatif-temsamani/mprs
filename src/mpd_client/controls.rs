@@ -26,6 +26,7 @@ pub fn pause(mut client: Client) {
 }
 
 pub fn prev(mut client: Client) {
+    client.pause(true).unwrap();
     match client.prev() {
         Ok(_) => match client.currentsong().unwrap() {
             Some(song) => println!(
@@ -39,6 +40,7 @@ pub fn prev(mut client: Client) {
             println!("{:?}", err.to_string().red().bold());
         }
     }
+    client.play().unwrap();
 }
 
 //NOTE: pause and play are there
