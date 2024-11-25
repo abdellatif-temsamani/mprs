@@ -23,7 +23,7 @@ fn main() {
         Commands::Next => next(client),
         Commands::Prev => prev(client),
         Commands::Kill => {
-            client.kill().unwrap();
+            let _ = client.kill();
             println!("{}", "kill MPD process".red().bold());
         }
         Commands::List { path } => list(client, &path),
