@@ -1,9 +1,8 @@
-use clap::{ColorChoice, Parser, Subcommand};
+use clap::{Parser, Subcommand};
 
 /// A fictional versioning CLI
 #[derive(Debug, Parser)] // requires `derive` feature
-#[command(name = "git")]
-#[command(about = "mpd client writen in rust")]
+#[command(name = "mprs", about = "mpd client writen in rust")]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
@@ -34,7 +33,6 @@ pub enum Commands {
 
     /// # Files
     #[command(
-        color= ColorChoice::Always,
         alias = "ls",
         about = "`ls` for short. list file in mpd music_directory"
     )]

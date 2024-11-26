@@ -13,6 +13,7 @@ use mpd_client::songs::{add_to_queue, list, list_queue, status};
 
 fn main() {
     let argv = Cli::parse();
+
     let mut client = connect_client(argv.host, argv.port);
 
     match argv.command {
