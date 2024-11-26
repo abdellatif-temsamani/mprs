@@ -1,10 +1,14 @@
 use colored::Colorize;
 use mpd::Client;
 
-pub fn play(mut client: Client) {
+pub fn play(client: &mut Client, quite: bool) {
     match client.play() {
         Ok(_) => match client.currentsong().unwrap() {
-            Some(song) => println!("{} '{}'", "playing".green(), song.title.unwrap().green()),
+            Some(song) => {
+                if !quite {
+                    println!("{} '{}'", "playing".green(), song.title.unwrap().green());
+                }
+            }
             None => println!("{}", "no current song to play".red().bold()),
         },
         Err(err) => {
@@ -13,10 +17,14 @@ pub fn play(mut client: Client) {
     }
 }
 
-pub fn pause(mut client: Client) {
+pub fn pause(client: &mut Client, quite: bool) {
     match client.pause(true) {
         Ok(_) => match client.currentsong().unwrap() {
-            Some(song) => println!("{} '{}'", "paused".green(), song.title.unwrap().green()),
+            Some(song) => {
+                if !quite {
+                    println!("{} '{}'", "paused".green(), song.title.unwrap().green());
+                }
+            }
             None => println!("{}", "no current song to play".red().bold()),
         },
         Err(err) => {
@@ -25,35 +33,41 @@ pub fn pause(mut client: Client) {
     }
 }
 
-pub fn prev(mut client: Client) {
-    client.pause(true).unwrap();
+pub fn prev(mut client: Client, quite: bool) {
+    pause(&mut client, quite);
     match client.prev() {
         Ok(_) => match client.currentsong().unwrap() {
-            Some(song) => println!(
-                "{} '{}'",
-                "going back to".green(),
-                song.title.unwrap().green()
-            ),
+            Some(song) => {
+                if !quite {
+                    println!(
+                        "{} '{}'",
+                        "going back to".green(),
+                        song.title.unwrap().green()
+                    );
+                }
+            }
             None => println!("{}", "no current song to play".red().bold()),
         },
         Err(err) => {
             println!("{:?}", err.to_string().red().bold());
         }
     }
-    client.play().unwrap();
+    play(&mut client, quite);
 }
 
-//NOTE: pause and play are there
-// to fix weird in mpd bug no idea why
-pub fn next(mut client: Client) {
-    client.pause(true).unwrap();
+pub fn next(mut client: Client, quite: bool) {
+    pause(&mut client, quite);
     match client.next() {
         Ok(_) => match client.currentsong().unwrap() {
-            Some(song) => println!(
-                "{} '{}'",
-                "playing next".green(),
-                song.title.unwrap().green()
-            ),
+            Some(song) => {
+                if !quite {
+                    println!(
+                        "{} '{}'",
+                        "playing next".green(),
+                        song.title.unwrap().green()
+                    )
+                }
+            }
             None => println!("{}", "no current song to play".red().bold()),
         },
         Err(err) => {
@@ -61,13 +75,17 @@ pub fn next(mut client: Client) {
         }
     }
 
-    client.play().unwrap();
+    play(&mut client, quite);
 }
 
-pub fn stop(mut client: Client) {
+pub fn stop(mut client: Client, quite: bool) {
     match client.stop() {
         Ok(_) => match client.currentsong().unwrap() {
-            Some(song) => println!("{} '{}'", "stopped".green(), song.title.unwrap().green()),
+            Some(song) => {
+                if !quite {
+                    println!("{} '{}'", "stopped".green(), song.title.unwrap().green());
+                }
+            }
             None => println!("{}", "no current song to play".red().bold()),
         },
         Err(err) => {

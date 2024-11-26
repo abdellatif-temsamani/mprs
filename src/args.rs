@@ -1,4 +1,4 @@
-use clap::{Parser, Subcommand};
+use clap::{ArgAction, Parser, Subcommand};
 
 /// A fictional versioning CLI
 #[derive(Debug, Parser)] // requires `derive` feature
@@ -19,17 +19,35 @@ pub enum Commands {
     #[command(about = "display info")]
     Status,
     #[command(about = "Play the queued song")]
-    Play,
+    Play {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Pause the queued song")]
-    Pause,
+    Pause {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Play the next queued song")]
-    Next,
+    Next {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Play the prev queued song")]
-    Prev,
+    Prev {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Stop the queued song")]
-    Stop,
+    Stop {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "kill MPD process")]
-    Kill,
+    Kill {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
 
     /// # Files
     #[command(
@@ -50,5 +68,8 @@ pub enum Commands {
     #[command(about = "Clear the queue")]
     Queued,
     #[command(about = "List the queue")]
-    Clear,
+    Clear {
+        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
 }
