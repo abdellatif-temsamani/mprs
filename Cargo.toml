@@ -1,6 +1,6 @@
 [package]
 name = "mprs"
-version = "0.3.0"
+version = "0.4.5"
 edition = '2021'
 authors = ["abdellatif-temsamani <contact@abdellatif.dev>"]
 description = "mpd written client rust"
