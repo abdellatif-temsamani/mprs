@@ -17,7 +17,7 @@ pub struct Cli {
 pub enum Commands {
     /// # controls
     #[command(about = "display info")]
-    Status,
+    Current,
     #[command(about = "Play the queued song")]
     Play {
         #[arg(short, long, required = false, action = ArgAction::SetTrue)]
@@ -72,4 +72,5 @@ pub enum Commands {
         #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
+    // repeat: off   random: off   single: off   consume: off
 }

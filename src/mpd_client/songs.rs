@@ -1,6 +1,8 @@
 use std::process::exit;
 
-use crate::utils::format_duration;
+use super::utils::get_current_song;
+use crate::utils::{err_print, format_duration, print, warn_print};
+
 use colored::Colorize;
 use mpd::{Client, Song};
 
@@ -17,7 +19,7 @@ pub fn list(mut client: Client, path: &str) {
             }
         }),
         Err(_err) => {
-            println!("No such file or directory");
+            err_print("No such file or directory".to_owned());
             exit(2);
         }
     }
@@ -28,7 +30,7 @@ pub fn list_queue(mut client: Client) {
     match queue {
         Ok(songs) => {
             if songs.is_empty() {
-                println!("{}", "Queue is empty".yellow());
+                warn_print("Queue is empty".to_owned());
             } else {
                 for song in songs {
                     println!(
@@ -42,7 +44,7 @@ pub fn list_queue(mut client: Client) {
         }
 
         Err(_err) => {
-            println!("error reading the queue");
+            err_print("error reading the queue".to_owned());
             exit(1);
         }
     }
@@ -72,28 +74,25 @@ pub fn add_to_queue(client: &mut Client, base_dir: &str) {
             }
         }),
         Err(_err) => {
-            println!("No such file or directory");
+            err_print("No such file or directory".to_owned());
             exit(2);
         }
     }
 }
 
-pub fn status(mut client: Client) {
-    match client.currentsong().unwrap() {
-        Some(song) => {
-            println!();
-            println!("{}", song.file);
-            println!(
-                "playing '{}' by {}",
-                song.title.unwrap_or("title not found".to_owned()).green(),
-                song.artist.unwrap_or("artist not found".to_owned()).green(),
-            );
-            println!(
-                "duration '{}' {}",
-                format_duration(song.duration.unwrap().as_secs()).green(),
-                song.file.green(),
-            );
-        }
-        None => println!("{}", "no current song to play".red().bold()),
-    };
+pub fn current(client: &mut Client) {
+    let song = get_current_song(client);
+    println!();
+    print("".to_owned());
+    println!("{}", song.file);
+    println!(
+        "playing '{}' by {}",
+        song.title.unwrap_or("title not found".to_owned()).green(),
+        song.artist.unwrap_or("artist not found".to_owned()).green(),
+    );
+    println!(
+        "duration '{}' {}",
+        format_duration(song.duration.unwrap().as_secs()).green(),
+        song.file.green(),
+    );
 }

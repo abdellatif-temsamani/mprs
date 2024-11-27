@@ -62,20 +62,20 @@ mprs [OPTIONS] <COMMAND>
 
 ### Commands
 
-| Command  | Description                                     |
-| -------- | ----------------------------------------------- |
-| `status` | Display MPD's current status and playback info. |
-| `play`   | Play the currently queued song.                 |
-| `pause`  | Pause playback.                                 |
-| `next`   | Skip to the next song in the queue.             |
-| `prev`   | Go back to the previous song in the queue.      |
-| `stop`   | Stop playback.                                  |
-| `kill`   | Kill the MPD process.                           |
-| `list`   | List files in the MPD `music_directory`.        |
-| `add`    | Add a song to the queue using its path.         |
-| `queued` | Show the current queue.                         |
-| `clear`  | Clear all songs from the queue.                 |
-| `help`   | Show help for a specific subcommand.            |
+| Command   | Description                                |
+| --------- | ------------------------------------------ |
+| `current` | Display MPD's current playback info.       |
+| `play`    | Play the currently queued song.            |
+| `pause`   | Pause playback.                            |
+| `next`    | Skip to the next song in the queue.        |
+| `prev`    | Go back to the previous song in the queue. |
+| `stop`    | Stop playback.                             |
+| `kill`    | Kill the MPD process.                      |
+| `list`    | List files in the MPD `music_directory`.   |
+| `add`     | Add a song to the queue using its path.    |
+| `queued`  | Show the current queue.                    |
+| `clear`   | Clear all songs from the queue.            |
+| `help`    | Show help for a specific subcommand.       |
 
 ### Example Commands
 
