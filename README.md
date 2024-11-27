@@ -1,3 +1,7 @@
+[![Crate Status](https://img.shields.io/crates/v/mprs?style=for-the-badge)](https://crates.io/crates/mprs)
+[![docs.rs](https://img.shields.io/docsrs/mprs?style=for-the-badge)](https://docs.rs/mprs/latest/mprs/)
+![License](https://img.shields.io/crates/l/mprs?style=for-the-badge)
+
 # mprs
 
 A **lightweight MPD client written in Rust**, designed for simplicity,
@@ -20,16 +24,25 @@ interface to control your MPD (Music Player Daemon) server efficiently.
    you are using the stable version.
 2. **MPD:** Install and configure MPD on your system.
 
+### Install from crates.io
+
+To build `mprs`.
+
+```bash
+# Build the project
+cargo install mprs
+```
+
 ### Build and Install
 
 To build and install `mprs`, follow these steps:
 
 ```bash
 # Build the project
-rustup run cargo build --release
+cargo build --release
 
 # Install the binary
-rustup run cargo install --path .
+cargo install --path .
 ```
 
 ## Usage
