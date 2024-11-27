@@ -1,9 +1,8 @@
-use clap::{ColorChoice, Parser, Subcommand};
+use clap::{ArgAction, Parser, Subcommand};
 
 /// A fictional versioning CLI
 #[derive(Debug, Parser)] // requires `derive` feature
-#[command(name = "git")]
-#[command(about = "mpd client writen in rust")]
+#[command(name = "mprs", about = "mpd client writen in rust")]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
@@ -18,23 +17,40 @@ pub struct Cli {
 pub enum Commands {
     /// # controls
     #[command(about = "display info")]
-    Status,
+    Current,
     #[command(about = "Play the queued song")]
-    Play,
+    Play {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Pause the queued song")]
-    Pause,
+    Pause {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Play the next queued song")]
-    Next,
+    Next {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Play the prev queued song")]
-    Prev,
+    Prev {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "Stop the queued song")]
-    Stop,
+    Stop {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
     #[command(about = "kill MPD process")]
-    Kill,
+    Kill {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
 
     /// # Files
     #[command(
-        color= ColorChoice::Always,
         alias = "ls",
         about = "`ls` for short. list file in mpd music_directory"
     )]
@@ -52,5 +68,36 @@ pub enum Commands {
     #[command(about = "Clear the queue")]
     Queued,
     #[command(about = "List the queue")]
-    Clear,
+    Clear {
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle repeat mode <on|off>")]
+    Repeat {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle random mode")]
+    Random {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle single mode")]
+    Single {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle consume mode")]
+    Consume {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
 }
