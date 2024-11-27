@@ -19,7 +19,7 @@ pub fn list(client: &mut Client, path: &str) {
             }
         }),
         Err(_err) => {
-            err_print("No such file or directory".to_owned());
+            err_print("No such file or directory");
             exit(2);
         }
     }
@@ -30,7 +30,7 @@ pub fn list_queue(client: &mut Client) {
     match queue {
         Ok(songs) => {
             if songs.is_empty() {
-                warn_print("Queue is empty".to_owned());
+                warn_print("Queue is empty");
             } else {
                 for song in songs {
                     println!(
@@ -44,7 +44,7 @@ pub fn list_queue(client: &mut Client) {
         }
 
         Err(_err) => {
-            err_print("error reading the queue".to_owned());
+            err_print("error reading the queue");
             exit(1);
         }
     }
@@ -74,7 +74,7 @@ pub fn add_to_queue(client: &mut Client, base_dir: &str) {
             }
         }),
         Err(_err) => {
-            err_print("No such file or directory".to_owned());
+            err_print("No such file or directory");
             exit(2);
         }
     }
@@ -83,7 +83,7 @@ pub fn add_to_queue(client: &mut Client, base_dir: &str) {
 pub fn current(client: &mut Client) {
     let song = get_current_song(client);
     println!();
-    print("".to_owned());
+    print("");
     println!("{}", song.file);
     println!(
         "playing '{}' by {}",

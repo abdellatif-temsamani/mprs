@@ -12,7 +12,7 @@ pub fn connect_client(host: String, port: String) -> Client {
     match Client::connect(format!("{}:{}", host, port)) {
         Ok(value) => value,
         Err(_err) => {
-            err_print("Connection refused".to_owned());
+            err_print("Connection refused");
             exit(1)
         }
     }
@@ -30,43 +30,43 @@ pub fn parse_args(commands: Commands, client: &mut Client) {
             client.stop().unwrap();
             let _ = client.kill();
             if !quite {
-                err_print(format!("{}", "kill MPD process".red().bold()));
+                err_print("kill MPD process");
             }
         }
         Commands::List { path } => list(client, &path),
         Commands::Add { path } => {
             add_to_queue(client, &path);
-            print(format!("{}", "added to the queue".green()));
+            print("added to the queue");
         }
         Commands::Queued => list_queue(client),
         Commands::Clear { quite } => {
             client.clear().unwrap();
             if !quite {
-                print(format!("{}", "cleared queue".green()));
+                print("cleared queue");
             }
         }
         Commands::Repeat { value, quite } => {
             client.repeat(value == "on").unwrap();
             if !quite {
-                print(format!("{} {}", "Repeat mode is".green(), value.green()));
+                print(&format!("{} {}", "Repeat mode is".green(), value.green()));
             }
         }
         Commands::Random { value, quite } => {
             client.repeat(value == "on").unwrap();
             if !quite {
-                print(format!("{} {}", "Repeat mode is".green(), value.green()));
+                print(&format!("{} {}", "Repeat mode is".green(), value.green()));
             }
         }
         Commands::Single { value, quite } => {
             client.repeat(value == "on").unwrap();
             if !quite {
-                print(format!("{} {}", "Repeat mode is".green(), value.green()));
+                print(&format!("{} {}", "Repeat mode is".green(), value.green()));
             }
         }
         Commands::Consume { value, quite } => {
             client.repeat(value == "on").unwrap();
             if !quite {
-                print(format!("{} {}", "Repeat mode is".green(), value.green()));
+                print(&format!("{} {}", "Repeat mode is".green(), value.green()));
             }
         }
     }
