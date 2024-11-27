@@ -23,6 +23,7 @@ fn main() {
         Commands::Next { quite } => next(client, quite),
         Commands::Prev { quite } => prev(client, quite),
         Commands::Kill { quite } => {
+            client.stop().unwrap();
             let _ = client.kill();
             if !quite {
                 println!("{}", "kill MPD process".red().bold());

@@ -20,32 +20,32 @@ pub enum Commands {
     Status,
     #[command(about = "Play the queued song")]
     Play {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
     #[command(about = "Pause the queued song")]
     Pause {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
     #[command(about = "Play the next queued song")]
     Next {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
     #[command(about = "Play the prev queued song")]
     Prev {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
     #[command(about = "Stop the queued song")]
     Stop {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
     #[command(about = "kill MPD process")]
     Kill {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
 
@@ -69,7 +69,7 @@ pub enum Commands {
     Queued,
     #[command(about = "List the queue")]
     Clear {
-        #[arg(long, required = false, action = ArgAction::SetTrue)]
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
 }
