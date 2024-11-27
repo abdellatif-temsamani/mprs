@@ -72,5 +72,32 @@ pub enum Commands {
         #[arg(short, long, required = false, action = ArgAction::SetTrue)]
         quite: bool,
     },
-    // repeat: off   random: off   single: off   consume: off
+    #[command(about = "Toggle repeat mode <on|off>")]
+    Repeat {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle random mode")]
+    Random {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle single mode")]
+    Single {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
+    #[command(about = "Toggle consume mode")]
+    Consume {
+        #[clap(required = true, action= ArgAction::Set)]
+        value: String,
+        #[arg(short, long, required = false, action = ArgAction::SetTrue)]
+        quite: bool,
+    },
 }

@@ -6,7 +6,7 @@ use crate::utils::{err_print, format_duration, print, warn_print};
 use colored::Colorize;
 use mpd::{Client, Song};
 
-pub fn list(mut client: Client, path: &str) {
+pub fn list(client: &mut Client, path: &str) {
     let dirs = client.listfiles(path);
 
     match dirs {
@@ -25,7 +25,7 @@ pub fn list(mut client: Client, path: &str) {
     }
 }
 
-pub fn list_queue(mut client: Client) {
+pub fn list_queue(client: &mut Client) {
     let queue = client.queue();
     match queue {
         Ok(songs) => {
