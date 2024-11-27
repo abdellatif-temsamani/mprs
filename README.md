@@ -1,5 +1,4 @@
 [![Crate Status](https://img.shields.io/crates/v/mprs?style=for-the-badge)](https://crates.io/crates/mprs)
-[![docs.rs](https://img.shields.io/docsrs/mprs?style=for-the-badge)](https://docs.rs/mprs/latest/mprs/)
 ![License](https://img.shields.io/crates/l/mprs?style=for-the-badge)
 
 # mprs
