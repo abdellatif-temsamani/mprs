@@ -47,7 +47,7 @@ pub fn prev(client: &mut Client, quite: bool) {
             if !quite {
                 print(&format!(
                     "{} '{}'",
-                    "[MPRS]:: Going back to".green(),
+                    "Going back to".green(),
                     song.title.unwrap().green()
                 ));
             }
@@ -67,7 +67,7 @@ pub fn next(client: &mut Client, quite: bool) {
             if !quite {
                 print(&format!(
                     "{} '{}'",
-                    "[MPRS]:: Playing next".green(),
+                    "Playing next".green(),
                     song.title.unwrap().green()
                 ));
             }

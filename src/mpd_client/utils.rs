@@ -1,6 +1,6 @@
 use std::process::exit;
 
-use colored::Colorize;
+use crate::utils::err_print;
 use mpd::{Client, Song};
 
 pub fn get_current_song(client: &mut Client) -> Song {
@@ -8,12 +8,12 @@ pub fn get_current_song(client: &mut Client) -> Song {
         Ok(song) => match song {
             Some(value) => value,
             None => {
-                eprintln!("{}", "[mprs]:: Current song not found".red().bold());
+                err_print("Current song not found");
                 exit(1);
             }
         },
         Err(_err) => {
-            eprintln!("{}", "[mprs]:: Current song not found".red().bold());
+            err_print("Current song not found");
             exit(1);
         }
     }
