@@ -14,5 +14,5 @@ exclude = [".github/*", "SECURITY.md", "CONTRIBUTING.md"]
 
 [dependencies]
 clap = { version = "4.5.21", features = ["cargo", "derive"] }
-colored = "2.1.0"
+colored = "3.0.0"
 mpd = "0.1.0"
