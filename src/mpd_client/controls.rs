@@ -8,7 +8,7 @@ pub fn play(client: &mut Client, quite: bool) {
         Ok(_) => {
             let song = get_current_song(client);
             if !quite {
-                print(format!(
+                print(&format!(
                     "{} '{}'",
                     "playing".green(),
                     song.title.unwrap().green()
@@ -16,7 +16,7 @@ pub fn play(client: &mut Client, quite: bool) {
             }
         }
         Err(err) => {
-            err_print(err.to_string());
+            err_print(&err.to_string());
         }
     }
 }
@@ -26,7 +26,7 @@ pub fn pause(client: &mut Client, quite: bool) {
         Ok(_) => {
             let song = get_current_song(client);
             if !quite {
-                print(format!(
+                print(&format!(
                     "{} '{}'",
                     "Pause".green(),
                     song.title.unwrap().green()
@@ -34,7 +34,7 @@ pub fn pause(client: &mut Client, quite: bool) {
             }
         }
         Err(err) => {
-            err_print(err.to_string());
+            err_print(&err.to_string());
         }
     }
 }
@@ -45,15 +45,15 @@ pub fn prev(client: &mut Client, quite: bool) {
         Ok(_) => {
             let song = get_current_song(client);
             if !quite {
-                print(format!(
+                print(&format!(
                     "{} '{}'",
-                    "[MPRS]:: Going back to".green(),
+                    "Going back to".green(),
                     song.title.unwrap().green()
                 ));
             }
         }
         Err(err) => {
-            err_print(err.to_string());
+            err_print(&err.to_string());
         }
     }
     play(client, true);
@@ -65,15 +65,15 @@ pub fn next(client: &mut Client, quite: bool) {
         Ok(_) => {
             let song = get_current_song(client);
             if !quite {
-                print(format!(
+                print(&format!(
                     "{} '{}'",
-                    "[MPRS]:: Playing next".green(),
+                    "Playing next".green(),
                     song.title.unwrap().green()
                 ));
             }
         }
         Err(err) => {
-            err_print(err.to_string());
+            err_print(&err.to_string());
         }
     }
 
@@ -85,7 +85,7 @@ pub fn stop(client: &mut Client, quite: bool) {
         Ok(_) => {
             let song = get_current_song(client);
             if !quite {
-                print(format!(
+                print(&format!(
                     "{} '{}'",
                     "stopped".green(),
                     song.title.unwrap().green()
@@ -93,7 +93,7 @@ pub fn stop(client: &mut Client, quite: bool) {
             }
         }
         Err(err) => {
-            err_print(err.to_string());
+            err_print(&err.to_string());
         }
     }
 }

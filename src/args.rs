@@ -2,7 +2,7 @@ use clap::{ArgAction, Parser, Subcommand};
 
 /// A fictional versioning CLI
 #[derive(Debug, Parser)] // requires `derive` feature
-#[command(name = "mprs", about = "mpd client writen in rust")]
+#[command(name = "mprs", about = "mpd client writen in rust", version)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
